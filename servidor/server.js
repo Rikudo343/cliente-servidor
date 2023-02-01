@@ -2,7 +2,7 @@ const net = require('net');
 let names = []//aqui almaceno los usuarios que se conecten
 
 const server = net.createServer((socket) =>{
-    console.log("llego un papu")
+    console.log("han entrado a la conversacion")
 
     socket.on('data',(data)=>{
 
@@ -25,11 +25,13 @@ const server = net.createServer((socket) =>{
             if(!flag){
                 names.push({socket, userName})
                 console.log(names.indexOf(userName))
-                socket.write("si cala tu nombre")
+                socket.write("nombre se ha registrado")
             }else{
-                socket.write("nombre ya usado")
+                socket.write("el nombre esta ocupado")
+                
             }
-        }else{
+        }
+        else{
 
             console.log('\nSe recibio el mensaje: ' + data)   
             names.forEach(client => {
@@ -48,11 +50,11 @@ const server = net.createServer((socket) =>{
     socket.on('end',()=>{//se cierra la secion del usuario
         const endSesion = names.indexOf(socket);
         names.splice(endSesion,1)
-        console.log('se fue un pibe')
+        console.log('ha dejado el servidor')
     })
 });
  
 
 server.listen(4000, ()=>{
-    console.log('si calo si el puerto', server.address().port)
-})
+    console.log('el puerto esta listo', server.address().port)
+}) 

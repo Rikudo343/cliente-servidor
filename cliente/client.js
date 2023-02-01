@@ -22,9 +22,9 @@ const client = net.createConnection(options, () =>{
         process.stdout.write("\n" + data)
         process.stdout.write("\nyo>")
 
-        if(data == "nombre ya usado"){
-            let name = readline.question("Cual es tu nombre?> ")
-            client.write("userName"+name)
+        if(data == "el nombre esta ocupado"){
+            client.end();
+            
         }
     });
  
@@ -40,5 +40,6 @@ client.on('error', (error) =>{
 })
 
 client.on('end',()=>{
-    console.log('ayoooooo usuario')
+    console.log('bye bye usuario')
 })
+
